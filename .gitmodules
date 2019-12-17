@@ -1,0 +1,4 @@
+[submodule "pisg"]
+	path = pisg
+	url = https://github.com/pisg/pisg.git
+	branch = master

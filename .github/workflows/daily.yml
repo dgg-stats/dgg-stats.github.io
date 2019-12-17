@@ -1,0 +1,32 @@
+on:
+  schedule:
+    - cron: '01 0 * * *'
+name: Update
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: true
+      - name: Update npm
+        run: |
+          npm install -g npm
+          npm --version
+      - name: Install dependencies
+        run: npm ci
+      - name: npm ls
+        run: npm ls
+      - name: Pull logs
+        run: |
+          mkdir -p logs/
+          npm run pull -- $(date -uI --date='-31 days') $(date -uI --date='-1 days') -o logs/
+      - name: pisg
+        run: |
+          perl ./pisg/pisg logs/
+          cp pisg/gfx/* out/
+      - name: html-inline
+        run: npm run inline
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

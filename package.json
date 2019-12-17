@@ -1,0 +1,19 @@
+{
+  "name": "dgg-stats",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "inline": "html-inline -b out/ < out/index.html > index.html",
+    "pull": "node cli.js pull"
+  },
+  "dependencies": {
+    "fs-write-stream-atomic": "1.0.10",
+    "moment": "2.24.0",
+    "overrustle-logs": "3.0.0",
+    "through2": "3.0.1",
+    "yargs": "15.0.2"
+  },
+  "devDependencies": {
+    "html-inline": "1.2.0"
+  }
+}
