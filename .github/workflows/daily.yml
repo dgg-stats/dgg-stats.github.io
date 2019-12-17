@@ -27,10 +27,10 @@ jobs:
           npm run pull -- $(date -uI --date='-31 days') $(date -uI --date='-1 days') -o logs/
       - name: pisg
         run: |
+          mkdir -p cache/ out/
           perl ./pisg/pisg logs/
-          cp pisg/gfx/* out/
-      - name: html-inline
-        run: npm run inline
+      - name: Minify HTML
+        run: npm run minify
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
